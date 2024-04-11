@@ -1,5 +1,5 @@
-# Lorentz's strange attractor implemented in C++ with SFML.
-
+# SFML Attractor
+Lorentz's strange attractor implemented in C++ with SFML.
 refer to [Lorentz system](https://en.wikipedia.org/wiki/Lorenz_system#A_Generalized_Lorenz_System) for more details
 
 ## Preview
