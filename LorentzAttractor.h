@@ -5,8 +5,8 @@
 #include <iostream>
 
 /*
-*  We're restricting lorentz attractor to only 2d
-* Original equations :
+*  We're restricting lorentz attractor
+*  differential equations :
 *  dx/dt = sigma * (y - x)
 *  dy/dt = x * ( rho - z ) - y
 *  dz/dt = x * y - beta * z
@@ -15,9 +15,11 @@
 * 
 */
 
-#define MAX_NUM_OF_POINTS 1000
+#define MAX_NUM_OF_POINTS 3000
+
+// lower the speed/ increase timestep if system becomes too unstable
 #define TIMESTEP 1
-#define SPEED 13
+#define SPEED 10
 
 enum class projectedPlane {XY, XZ, YZ};
 
@@ -33,10 +35,12 @@ private:
 	
 	//color of the path
 	sf::Color color;
-	bool rainbowColor ; //sets a rainbow colored path
 	//parameters, mess around them for fun
 	float sigma, rho, beta;
 public:
+
+	bool rainbowColor; //sets a rainbow colored path
+
 	//Copy constructor
 	LorentzAttractor(const LorentzAttractor&& l) noexcept
 	{

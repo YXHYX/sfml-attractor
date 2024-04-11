@@ -14,12 +14,27 @@
 int main() 
 {
 	sf::RenderWindow window(sf::VideoMode(800,600), "SFML Attractor");
+	int numOfAttractors;
+	std::cout << "Enter the number of lorentz attractors: ";
+	std::cin >> numOfAttractors;
+	std::cout << "\nPlease specify sigma, rho and beta:";
 	
 	std::vector<LorentzAttractor> attractors;
-	attractors.push_back(LorentzAttractor(40, 25, 10, sf::Color(255,215,0)));
-	attractors.push_back(LorentzAttractor(20, 18, 5, sf::Color(255, 120, 200)));
-	attractors.push_back(LorentzAttractor(50, 1, 50, sf::Color::Yellow));
 
+	for(int i = 0; i < numOfAttractors; i++)
+	{
+		float sigma, rho, beta;
+		sf::Color color;
+		std::cout << "\n Sigma: ";
+		std::cin >> sigma;
+		std::cout << " | Rho: ";
+		std::cin >> rho;
+		std::cout << " | Beta: ";
+		std::cin >> beta;
+		//attractors.push_back(LorentzAttractor(sigma, rho, beta, color));
+		attractors[i].rainbowColor = true;
+	}
+	std::cout << "\nUse arrow keys to navigate through, I O P keys to change plane of view, number keys to select which attractor to follow\n";
 	sf::Clock clock;
 	float dt =0.0001;
 
@@ -66,8 +81,11 @@ int main()
 				view.move(1000 * dt, 0);
 
 			//set the center of view to that of the 1st attractor
-			if(sf::Keyboard::isKeyPressed(sf::Keyboard::Num0))
-				view.setCenter(attractors[0].getProjectedHead());
+			for (int i = 0; i < numOfAttractors; i++)
+			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(sf::Keyboard::Num0+i)))
+					view.setCenter(attractors[i].getProjectedHead());
+			}
 		}
 		
 		for(auto &e : attractors)

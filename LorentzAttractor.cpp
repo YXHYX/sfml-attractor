@@ -89,6 +89,7 @@ void LorentzAttractor::update(const float dt)
 void LorentzAttractor::draw(sf::RenderTarget* target)
 {
 	sf::VertexArray vao(sf::LineStrip, this->path.size());
+	vao.clear();
 	
 	int size = this->path.size();
 	for (int i = 0; i < size; i++)
@@ -100,6 +101,7 @@ void LorentzAttractor::draw(sf::RenderTarget* target)
 			lineColor.g = 127 * std::cos(i ) + 127;
 			lineColor.b = 127 * std::sin(-i) + 127;
 		}
+		//std::cout << "POINT COORDINATES "<< i << " :  " << this->head.x << "  //  " << this->head.y << "  //  " << this->head.z << std::endl;
 		sf::Vertex v;
 		switch(plane)
 		{
@@ -120,6 +122,5 @@ void LorentzAttractor::draw(sf::RenderTarget* target)
 			break;
 		}
 	}
-
 	target->draw(vao);
 }
